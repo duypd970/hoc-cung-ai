@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng dẫn Xoá Dữ liệu • Học Cùng AI</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-2: #f1f5f9;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #596780;
+      --primary: #2563eb;
+      --red: #b91c1c;
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+      --radius: 12px;
+      --radius-sm: 6px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #090d16;
+        --surface: #111827;
+        --surface-2: #1f2937;
+        --border: #2d3748;
+        --text: #f9fafb;
+        --text-muted: #94a3b8;
+        --primary: #60a5fa;
+        --red: #f87171;
+        --red-bg: #7f1d1d33;
+        --red-border: #dc262666;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-2: #1f2937;
+      --border: #2d3748;
+      --text: #f9fafb;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --red: #f87171;
+      --red-bg: #7f1d1d33;
+      --red-border: #dc262666;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 16px 48px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .back-nav {
+      margin-bottom: 20px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 6px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+    }
+    .back-link:hover {
+      background: var(--surface-2);
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .meta-date {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+    h2 {
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-top: 28px;
+      margin-bottom: 12px;
+    }
+    p, li {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    li { margin-bottom: 6px; }
+    .step-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .danger-box {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    a { color: var(--primary); }
+    code {
+      font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface-2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.88rem;
+    }
+    @media (max-width: 480px) {
+      .card { padding: 20px 16px; }
+      h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="back-nav">
+      <a href="/" class="back-link">← Quay lại trang chủ Học Cùng AI</a>
+    </nav>
+    <main class="card">
+      <h1>Hướng dẫn Xoá Dữ liệu Người dùng</h1>
+      <div class="meta-date">Ngày hiệu lực: 13/10/2026</div>
+
+      <p>
+        <strong>Học Cùng AI</strong> luôn tôn trọng quyền riêng tư và quyền làm chủ dữ liệu cá nhân
+        của người học. Theo chính sách bảo vệ dữ liệu và quy định dành cho nhà phát triển của
+        Facebook và Google, trang này hướng dẫn bạn cách thức yêu cầu xoá hoặc tự xoá toàn bộ dữ
+        liệu tài khoản của mình khỏi hệ thống.
+      </p>
+
+      <h2>1. Tự xoá trực tiếp trong ứng dụng (Khuyến nghị — Xử lý tức thì)</h2>
+      <p>
+        Bạn có thể tự xoá vĩnh viễn tài khoản và dữ liệu bất cứ lúc nào mà không cần chờ ban quản
+        trị xét duyệt:
+      </p>
+      <div class="step-box">
+        <ol>
+          <li>Đăng nhập vào tài khoản của bạn trên website Học Cùng AI.</li>
+          <li>
+            Bấm vào ảnh đại diện hoặc tên của bạn ở góc trên bên phải để vào mục
+            <strong>Tài khoản</strong> (hoặc truy cập đường dẫn <code>#/account</code>).
+          </li>
+          <li>Kéo xuống cuối trang đến phần <strong>Vùng nguy hiểm</strong>.</li>
+          <li>Bấm nút <strong>Xoá tài khoản</strong>.</li>
+          <li>
+            Nhập chính xác chữ <code>XOÁ</code> vào ô xác nhận để tránh việc vô tình bấm nhầm.
+          </li>
+          <li>
+            Bấm <strong>Xác nhận xoá vĩnh viễn</strong>. Hệ thống sẽ ngay lập tức xoá toàn bộ dữ
+            liệu và đưa bạn trở về trang chủ.
+          </li>
+        </ol>
+      </div>
+
+      <h2>2. Yêu cầu xoá dữ liệu qua Email</h2>
+      <p>
+        Trong trường hợp bạn không thể đăng nhập vào ứng dụng, hoặc muốn ban quản trị thực hiện
+        xoá thủ công từ bên ngoài (bao gồm người dùng đăng nhập qua Facebook Login):
+      </p>
+      <ul>
+        <li>
+          Gửi email đến ban quản trị tại địa chỉ: <strong>[email liên hệ]</strong>
+        </li>
+        <li>
+          Tiêu đề thư: <code>[Yêu cầu xoá dữ liệu] - &lt;Địa chỉ email đăng ký&gt;</code>
+        </li>
+        <li>
+          Nội dung thư: Nêu rõ email bạn đã sử dụng để đăng nhập vào Học Cùng AI (hoặc mã ID người
+          dùng Facebook nếu có).
+        </li>
+        <li>
+          <strong>Thời gian xử lý:</strong> Ban quản trị sẽ phản hồi và hoàn tất việc xoá dữ liệu
+          trong vòng tối đa 7 ngày làm việc kể từ thời điểm nhận được yêu cầu.
+        </li>
+      </ul>
+
+      <h2>3. Những dữ liệu sẽ bị xoá vĩnh viễn</h2>
+      <p>Khi tiến trình xoá hoàn tất, hệ thống sẽ xoá bỏ không thể phục hồi:</p>
+      <ul>
+        <li>
+          <strong>Thông tin xác thực & Hồ sơ:</strong> Địa chỉ email, tên hiển thị, ảnh đại diện,
+          tài khoản liên kết trong hệ thống Supabase Auth và bảng <code>profiles</code>.
+        </li>
+        <li>
+          <strong>Dữ liệu học tập cá nhân:</strong> Toàn bộ ghi chú, lộ trình học cá nhân, sổ tay
+          lỗi sai, kết quả luyện tập có đường dẫn <code>data/users/&lt;id&gt;/*</code>.
+        </li>
+      </ul>
+
+      <h2>4. Những dữ liệu được giữ lại dưới dạng ẩn danh hoá</h2>
+      <div class="danger-box">
+        <p style="margin: 0;">
+          <strong>Bảo toàn tri thức cộng đồng:</strong> Các khoá học hoặc câu hỏi/câu trả lời mà
+          bạn đã chủ động đóng góp ở chế độ <strong>Công khai</strong> cho cộng đồng người học sẽ
+          được giữ lại để không làm gián đoạn quá trình học tập của những người khác. Tuy nhiên,
+          toàn bộ các tài liệu này sẽ được <strong>ẩn danh hoá hoàn toàn</strong> bằng cách xoá
+          liên kết người tạo (<code>owner_id = null</code>), không còn bất kỳ dấu vết hay liên hệ
+          nào tới danh tính của bạn.
+        </p>
+      </div>
+
+      <h2>5. Liên hệ giải đáp thắc mắc</h2>
+      <p>
+        Nếu bạn có bất kỳ băn khoăn nào về tiến trình xoá dữ liệu hoặc quyền riêng tư, vui lòng
+        liên hệ qua: <strong>[email liên hệ]</strong>.
+      </p>
+    </main>
+  </div>
+</body>
+</html>
