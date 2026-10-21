@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Học Cùng AI</title>
+  <meta name="description" content="Gõ chủ đề bất kỳ để học: khoá học do AI soạn, flashcard, quiz, bài tập có chấm điểm và gia sư hỏi đáp. Có sẵn khoá Cấu trúc dữ liệu &amp; Giải thuật PTIT.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=a1612621">
+  <link rel="stylesheet" href="auth.css?v=5b923506">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#6d28d9">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/favicon-32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Học Cùng AI">
+</head>
+<body>
+<header class="header">
+    <div class="header-inner">
+      <a href="#/" class="logo">Học Cùng AI</a>
+      <nav id="nav" aria-label="Điều hướng chính">
+        <a href="#/" class="nav-item">
+          <span class="nav-icon" aria-hidden="true">📊</span>
+          <span class="nav-label">Tổng quan</span>
+        </a>
+        <a href="#/plan" class="nav-item">
+          <span class="nav-icon" aria-hidden="true">📅</span>
+          <span class="nav-label">Lộ trình</span>
+        </a>
+        <a href="#/chapters" class="nav-item">
+          <span class="nav-icon" aria-hidden="true">📚</span>
+          <span class="nav-label">Bài học</span>
+        </a>
+        <a href="#/practice" class="nav-item">
+          <span class="nav-icon" aria-hidden="true">⚡</span>
+          <span class="nav-label">Luyện tập</span>
+        </a>
+        <a href="#/mistakes" class="nav-item">
+          <span class="nav-icon" aria-hidden="true">📝</span>
+          <span class="nav-label">Sổ lỗi sai</span>
+        </a>
+      </nav>
+      <div class="header-actions">
+        <span id="sync-status" class="sync-status">Đang nạp…</span>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Đổi giao diện sáng/tối" title="Đổi giao diện sáng/tối">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app">Đang tải…</main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="vendor/supabase.js?v=6ee0edf0"></script>
+  <script src="config.js?v=409178ee"></script>
+  <script src="backend-supabase.js?v=8d19f0ec"></script>
+  <script src="cloud-shim.js?v=c8040185"></script>
+  <script src="auth.js?v=29e34daf"></script>
+  <script src="pwa.js?v=e3e38a10"></script>
+  <script src="data/plan.js?v=c81f6029"></script>
+  <script src="data/ch1-3.js?v=0272ec33"></script>
+  <script src="data/ch4-6.js?v=d133f334"></script>
+  <script src="data/ch7.js?v=b1ae752f"></script>
+  <script src="data/tests.js?v=5aca7936"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="materials.js?v=8f7739e0"></script>
+  <script src="courses.js?v=6cbf56e7"></script>
+  <script src="store.js?v=1cb9a006"></script>
+  <script src="app.js?v=62245a7e"></script>
+
+</body>
+</html>

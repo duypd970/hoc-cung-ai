@@ -1,0 +1,1 @@
+window.HCA_CONFIG = {"supabaseUrl":"https://rmtvspllqnqdtevqkupi.supabase.co","supabaseAnonKey":"sb_publishable_wN-HOG1N4WMI-f6rtRp4ew_Gfeay4_d","mock":false,"ai":false,"providers":[],"appName":"Học Cùng AI"};

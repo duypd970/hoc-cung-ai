@@ -1,0 +1,764 @@
+/* ==========================================================================
+   auth.css — Định kiểu Đăng nhập & Tài khoản cho "Học Cùng AI"
+   Tiền tố hca-, dùng biến màu từ style.css, hỗ trợ sáng/tối và mobile >= 320px.
+   Không dòng nào vượt quá 200 ký tự.
+   ========================================================================== */
+
+/* ---------- Nút trên Header (.header-actions) ---------- */
+.hca-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--primary-text) !important;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.hca-login-btn:hover {
+  transform: translateY(-1px);
+  background: var(--primary-hover);
+  box-shadow: var(--shadow);
+  color: var(--primary-text) !important;
+  text-decoration: none;
+}
+
+.hca-login-btn:active {
+  transform: scale(0.97);
+}
+
+.hca-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1;
+  user-select: none;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.hca-avatar:hover {
+  transform: scale(1.06);
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.hca-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hca-avatar-big {
+  width: 72px;
+  height: 72px;
+  font-size: 1.85rem;
+  border-width: 3px;
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Trang & Thẻ Bao Ngoài ---------- */
+.hca-page-auth {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-2);
+  box-sizing: border-box;
+}
+
+.hca-page-account {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-2);
+  box-sizing: border-box;
+}
+
+.hca-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-6);
+  box-sizing: border-box;
+  position: relative;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.hca-auth-card {
+  overflow: hidden;
+}
+
+.hca-auth-header {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.hca-auth-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+  color: var(--text);
+}
+
+.hca-auth-sub {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ---------- Nút Đăng nhập Xã hội ---------- */
+.hca-social-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.hca-btn-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+  text-decoration: none;
+  min-height: 42px;
+}
+
+.hca-btn-social svg {
+  flex-shrink: 0;
+}
+
+.hca-btn-google {
+  background: #ffffff;
+  color: #1f2937;
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-sm);
+}
+
+.hca-btn-google:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.hca-btn-facebook {
+  background: #1877f2;
+  color: #ffffff;
+  border-color: #1877f2;
+  box-shadow: 0 2px 4px rgba(24, 119, 242, 0.25);
+}
+
+.hca-btn-facebook:hover:not(:disabled) {
+  background: #166fe5;
+  border-color: #166fe5;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(24, 119, 242, 0.35);
+}
+
+.hca-btn-social:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Chế độ tối cho nút Google */
+[data-theme="dark"] .hca-btn-google {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .hca-btn-google:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--border-focus);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hca-btn-google {
+    background: var(--surface-2);
+    color: var(--text);
+    border-color: var(--border);
+  }
+  :root:not([data-theme="light"]) .hca-btn-google:hover:not(:disabled) {
+    background: var(--surface-hover);
+    border-color: var(--border-focus);
+  }
+}
+
+/* ---------- Vạch phân cách & Tabs ---------- */
+.hca-divider {
+  display: flex;
+  align-items: center;
+  margin: var(--space-4) 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.hca-divider::before,
+.hca-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.hca-divider span {
+  padding: 0 var(--space-3);
+  white-space: nowrap;
+}
+
+.hca-tabs {
+  display: flex;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3px;
+  gap: 3px;
+  margin-bottom: var(--space-5);
+}
+
+.hca-tab-btn {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.hca-tab-btn.active {
+  background: var(--surface);
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Biểu mẫu (Forms) & Trường nhập ---------- */
+.hca-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.hca-form-group {
+  margin-bottom: var(--space-4);
+}
+
+.hca-label {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-1);
+}
+
+.hca-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-1);
+}
+
+.hca-text-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.15s ease;
+}
+
+.hca-text-btn:hover {
+  text-decoration: underline;
+}
+
+.hca-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.hca-input {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 0.92rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hca-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.hca-toggle-pass {
+  position: absolute;
+  right: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.hca-toggle-pass:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.hca-submit-btn {
+  width: 100%;
+  padding: 11px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-text);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+  margin-top: var(--space-2);
+}
+
+.hca-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--primary-hover);
+  box-shadow: var(--shadow);
+}
+
+.hca-submit-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* ---------- Hộp Thông báo (Alerts) ---------- */
+.hca-alert {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin-bottom: var(--space-4);
+  box-sizing: border-box;
+}
+
+.hca-alert-error {
+  background: var(--red-bg);
+  color: var(--red);
+  border: 1px solid var(--red-border);
+}
+
+.hca-alert-success {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid var(--green-border);
+}
+
+.hca-alert-info {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border: 1px solid var(--blue-border);
+}
+
+/* ---------- Pháp lý & Ghi chú Đăng nhập ---------- */
+.hca-auth-legal {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin: var(--space-4) 0 0;
+  line-height: 1.5;
+}
+
+.hca-auth-legal a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.hca-auth-legal a:hover {
+  text-decoration: underline;
+}
+
+.hca-auth-claude-note {
+  margin-top: var(--space-4);
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.hca-auth-claude-note p {
+  margin: 0;
+}
+
+/* ---------- Trang Tài khoản (#/account) ---------- */
+.hca-account-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.hca-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 var(--space-4);
+}
+
+.hca-card-subtitle {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.hca-profile-header {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.hca-profile-info {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.hca-name-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.hca-input-btn-row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.hca-input-btn-row .hca-input {
+  flex: 1;
+}
+
+.hca-meta-row {
+  display: flex;
+  gap: var(--space-2);
+  font-size: 0.88rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.hca-meta-label {
+  color: var(--text-muted);
+  font-weight: 500;
+  min-width: 120px;
+}
+
+.hca-meta-val {
+  color: var(--text);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+/* ---------- Thẻ Kết nối Claude ---------- */
+.hca-card-claude {
+  border-color: var(--primary-border);
+}
+
+.hca-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  line-height: 1.3;
+}
+
+.hca-badge-green {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid var(--green-border);
+}
+
+.hca-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  flex-shrink: 0;
+}
+
+.hca-model-info {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+  line-height: 1.5;
+}
+
+.hca-disconnect-btn {
+  color: var(--red) !important;
+  border-color: var(--red-border) !important;
+}
+
+.hca-disconnect-btn:hover {
+  background: var(--red-bg) !important;
+}
+
+.hca-usage-box {
+  background: var(--surface-2);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-4);
+}
+
+.hca-usage-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.86rem;
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.hca-usage-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.hca-usage-val {
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-code);
+}
+
+.hca-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.hca-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.hca-claude-explain {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: var(--space-4);
+}
+
+.hca-link-ext {
+  display: inline-block;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-all;
+  margin-top: 2px;
+}
+
+.hca-link-ext:hover {
+  text-decoration: underline;
+}
+
+.hca-bullet-list {
+  margin: var(--space-2) 0;
+  padding-left: var(--space-5);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.hca-key-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 480px;
+}
+
+.hca-connect-btn {
+  align-self: flex-start;
+}
+
+/* ---------- Thẻ Bảo mật ---------- */
+.hca-pw-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 440px;
+}
+
+.hca-note-text {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.hca-logout-row {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+.hca-logout-btn {
+  color: var(--text-secondary);
+}
+
+.hca-logout-btn:hover {
+  color: var(--red);
+  background: var(--red-bg);
+  border-color: var(--red-border);
+}
+
+/* ---------- Vùng Nguy hiểm (Danger Zone) ---------- */
+.hca-card-danger {
+  border-color: var(--red-border);
+}
+
+.hca-text-danger {
+  color: var(--red);
+}
+
+.hca-danger-desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 var(--space-4);
+}
+
+.hca-delete-confirm-box {
+  background: var(--surface);
+  border: 1px solid var(--red-border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  margin-top: var(--space-3);
+  max-width: 460px;
+}
+
+.hca-confirm-label {
+  font-size: 0.86rem;
+  color: var(--text);
+  margin: 0 0 var(--space-3);
+  line-height: 1.45;
+}
+
+.hca-confirm-input {
+  margin-bottom: var(--space-3);
+  border-color: var(--red-border);
+}
+
+.hca-confirm-input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.2);
+}
+
+.hca-btn-row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hca-btn-delete {
+  color: var(--red) !important;
+  border-color: var(--red-border) !important;
+  background: transparent !important;
+}
+
+.hca-btn-delete:hover {
+  background: var(--red-bg) !important;
+}
+
+/* Responsive cho màn hình nhỏ (≥ 320px) */
+@media (max-width: 480px) {
+  .hca-page-auth,
+  .hca-page-account {
+    padding: var(--space-2) var(--space-1);
+  }
+  .hca-card {
+    padding: var(--space-4);
+    border-radius: var(--radius);
+  }
+  .hca-profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hca-profile-info {
+    width: 100%;
+    min-width: 100%;
+  }
+  .hca-input-btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hca-meta-row {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
