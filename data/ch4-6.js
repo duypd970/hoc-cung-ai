@@ -337,7 +337,8 @@ while (!st.empty()) { cout << st.top() << " "; st.pop(); }   // 2 1`
         },
         {
           heading: "Khử đệ quy bằng stack",
-          body: `Lời gọi đệ quy thực chất được máy lưu trong **ngăn xếp gọi hàm**. Muốn khử đệ quy, ta tự dùng stack để lưu các tham số/trạng thái cần xử lý sau. Ví dụ duyệt cây NLR không đệ quy, DFS không đệ quy, Tháp Hà Nội đều làm được bằng cách này.\n\nLý do khử đệ quy: tránh tràn ngăn xếp khi độ sâu lớn (ví dụ 10^6) và kiểm soát bộ nhớ.`,
+          body: `Lời gọi đệ quy thực chất được máy lưu trong **ngăn xếp gọi hàm**. Muốn khử đệ quy, ta tự dùng stack để lưu các tham số/trạng thái cần xử lý sau. Ví dụ duyệt cây NLR không đệ quy, DFS không đệ quy, Tháp Hà Nội đều làm được bằng cách này.\n\nLý do khử đệ quy: tránh tràn ngăn xếp khi độ sâu lớn (ví dụ 10^6) và kiểm soát bộ nhớ.\n\nKéo thử giản đồ bên dưới để thấy **push(A,B,C,D) rồi in ngược D,C,B,A** diễn ra giống hệt nhau dù bạn tự tay push/pop hay để máy làm qua lệnh gọi \`printRev\`.`,
+          diagram: "stack-recursion",
           code: `// In dãy số theo kiểu "đệ quy xuống sâu rồi in ngược":
 void printRev(Node *p) { if (p) { printRev(p->next); cout << p->data << " "; } }
 

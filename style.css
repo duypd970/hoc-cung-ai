@@ -6383,3 +6383,36 @@ textarea.write-essay:focus,
 .vocab-card { border: 1px solid var(--border); background: linear-gradient(135deg, var(--surface), var(--surface)); }
 .essay-task { background: var(--surface); border: 1px solid var(--border); }
 }
+
+/* ---------- /teach: Gia sư của tôi ---------- */
+.teach-form input[type="text"],
+.teach-form textarea {
+  width: 100%;
+  padding: 10px var(--space-3);
+  font: inherit;
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  box-sizing: border-box;
+  resize: vertical;
+}
+.teach-form .seg-row { align-items: flex-start; }
+.teach-form .seg-row input[type="text"] { flex: 1; }
+.teach-form .seg-row textarea { flex: 1; min-width: 200px; }
+
+/* ---------- Giản đồ "giải phẫu" tương tác trong bài học (stackDiagram) ---------- */
+.lesson-diagram { margin: var(--space-4) 0; }
+.lesson-diagram-stage { width: 100%; max-width: 420px; margin: 0 auto; }
+.lesson-diagram-stage svg { width: 100%; height: auto; display: block; }
+.diagram-col-label { font-size: 9px; fill: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.diagram-base { stroke: var(--border); stroke-width: 2; }
+.diagram-box { fill: var(--primary-light); stroke: var(--primary-border); stroke-width: 1.5; transition: fill 0.15s ease; }
+.diagram-box-top { fill: var(--primary); }
+.diagram-box-text { font-size: 13px; font-weight: 700; fill: var(--text); }
+.diagram-box-top + .diagram-box-text, .diagram-box-top ~ text.diagram-box-text { fill: #fff; }
+.diagram-readout { font-size: 10px; fill: var(--text-secondary); }
+.diagram-readout-text { font-size: 0.9rem; color: var(--text-secondary); text-align: center; min-height: 1.4em; }
+.diagram-controls { display: flex; align-items: center; gap: var(--space-3); justify-content: center; margin-top: var(--space-2); }
+.diagram-controls .diagram-range { flex: 1; max-width: 180px; }

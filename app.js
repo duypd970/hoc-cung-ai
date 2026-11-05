@@ -102,6 +102,91 @@
   }
   function codeBlock(src) { return h('pre', { class: 'code' }, h('code', null, String(src))); }
 
+  // ---------- Giản đồ "giải phẫu" tương tác: Ngăn xếp & lệnh gọi đệ quy (anatomy-style) ----------
+  // Tĩnh, không phụ thuộc dữ liệu người dùng -> an toàn khi dựng bằng innerHTML (giống icon()).
+  var STACK_DIAGRAMS = {
+    'stack-recursion': {
+      title: 'Giải phẫu: Ngăn xếp & lệnh gọi đệ quy',
+      hint: 'Kéo thanh trượt hoặc bấm Tiến/Lùi. So sánh cột trái (stack tự tay push/pop) với cột phải (ngăn xếp gọi hàm khi đệ quy) — cùng một cơ chế LIFO.',
+      nodes: ['A', 'B', 'C', 'D'],
+      steps: function (nodes) {
+        var s = [{ stack: [], printed: [], note: 'Bắt đầu: ngăn xếp rỗng, chưa in gì.' }];
+        nodes.forEach(function (n) {
+          var top = s[s.length - 1];
+          s.push({ stack: top.stack.concat([n]), printed: top.printed.slice(),
+            note: 'push(' + n + ')  —  tương đương lệnh gọi printRev(' + n + ') đi sâu thêm một tầng.' });
+        });
+        nodes.slice().reverse().forEach(function (n) {
+          var top = s[s.length - 1];
+          s.push({ stack: top.stack.slice(0, -1), printed: top.printed.concat([n]),
+            note: 'in "' + n + '", rồi pop()  —  tương đương printRev(' + n + ') in xong và return.' });
+        });
+        return s;
+      }
+    }
+  };
+  function stackDiagram(key) {
+    var cfg = STACK_DIAGRAMS[key];
+    if (!cfg) return null;
+    var steps = cfg.steps(cfg.nodes);
+    var cur = 0;
+    var H = 34, GAP = 4, BOX_W = 72, BASE_Y = 190;
+    var wrap = h('div', { class: 'lesson-diagram card' });
+    wrap.appendChild(h('h4', { class: 'card-title' }, cfg.title));
+    wrap.appendChild(h('p', { class: 'muted' }, cfg.hint));
+    var stage = h('div', { class: 'lesson-diagram-stage' });
+    stage.innerHTML =
+      '<svg viewBox="0 0 320 210" role="img" aria-label="' + cfg.title + '">' +
+      '<text x="80" y="18" text-anchor="middle" class="diagram-col-label">Stack tự quản lý</text>' +
+      '<text x="240" y="18" text-anchor="middle" class="diagram-col-label">Ngăn xếp gọi hàm</text>' +
+      '<line x1="40" y1="' + (BASE_Y + 8) + '" x2="120" y2="' + (BASE_Y + 8) + '" class="diagram-base"/>' +
+      '<line x1="200" y1="' + (BASE_Y + 8) + '" x2="280" y2="' + (BASE_Y + 8) + '" class="diagram-base"/>' +
+      '<g id="hca-stack-left"></g><g id="hca-stack-right"></g>' +
+      '<text id="hca-stack-printed" x="160" y="205" text-anchor="middle" class="diagram-readout"></text>' +
+      '</svg>';
+    wrap.appendChild(stage);
+    var readout = h('p', { class: 'diagram-readout-text' });
+    wrap.appendChild(readout);
+    var range = h('input', { type: 'range', min: '0', max: String(steps.length - 1), value: '0', class: 'diagram-range', 'aria-label': 'Bước' });
+    var prevBtn = btn('← Lùi', 'btn-small btn-ghost', function () { paint(Math.max(0, cur - 1)); });
+    var nextBtn = btn('Tiến →', 'btn-small btn-primary', function () { paint(Math.min(steps.length - 1, cur + 1)); });
+    wrap.appendChild(h('div', { class: 'diagram-controls' }, [prevBtn, range, nextBtn]));
+
+    function colBoxes(svgNs, groupId, stackArr, x0) {
+      var g = stage.querySelector('#' + groupId);
+      g.textContent = '';
+      stackArr.forEach(function (label, i) {
+        var y = BASE_Y - (i + 1) * (H + GAP);
+        var isTop = i === stackArr.length - 1;
+        var rect = document.createElementNS(svgNs, 'rect');
+        rect.setAttribute('x', x0); rect.setAttribute('y', y);
+        rect.setAttribute('width', BOX_W); rect.setAttribute('height', H);
+        rect.setAttribute('rx', 6);
+        rect.setAttribute('class', 'diagram-box' + (isTop ? ' diagram-box-top' : ''));
+        g.appendChild(rect);
+        var text = document.createElementNS(svgNs, 'text');
+        text.setAttribute('x', x0 + BOX_W / 2); text.setAttribute('y', y + H / 2 + 5);
+        text.setAttribute('text-anchor', 'middle'); text.setAttribute('class', 'diagram-box-text');
+        text.textContent = label;
+        g.appendChild(text);
+      });
+    }
+    function paint(i) {
+      cur = i;
+      var st = steps[i];
+      var svgNs = 'http://www.w3.org/2000/svg';
+      colBoxes(svgNs, 'hca-stack-left', st.stack, 44);
+      colBoxes(svgNs, 'hca-stack-right', st.stack, 204);
+      stage.querySelector('#hca-stack-printed').textContent = st.printed.length ? 'Đã in: ' + st.printed.join(' ') : '';
+      readout.textContent = 'Bước ' + i + '/' + (steps.length - 1) + ' — ' + st.note;
+      range.value = String(i);
+      prevBtn.disabled = i === 0; nextBtn.disabled = i === steps.length - 1;
+    }
+    range.addEventListener('input', function () { paint(+range.value); });
+    paint(0);
+    return wrap;
+  }
+
   function empty(msg, href, label) {
     var d = h('div', { class: 'empty' }, h('p', null, msg));
     if (href) d.appendChild(link(href, 'btn btn-primary', label || 'Về tổng quan'));
@@ -2461,6 +2546,7 @@
       if (s.heading) sec.appendChild(h('h2', null, s.heading));
       if (s.body) sec.appendChild(renderText(s.body));
       if (s.code) sec.appendChild(codeBlock(s.code));
+      if (s.diagram) { var dg = stackDiagram(s.diagram); if (dg) sec.appendChild(dg); }
       if (s.complexity) sec.appendChild(h('div', { class: 'complexity' }, 'Độ phức tạp: ' + s.complexity));
       if (s.source) sec.appendChild(h('div', { class: 'source-ref' }, s.source));
       art.appendChild(sec);
@@ -3788,6 +3874,7 @@
         : 'Gõ một chủ đề bất kỳ. Có khoá sẵn thì mở ngay, chưa có thì Claude soạn đề cương cho bạn.'),
       h('div', { class: 'search-wrap' }, input),
       readOnly() || webNoAI() ? null : h('div', { class: 'card-actions' }, link('#/new/materials', 'btn btn-primary', '📎 Tạo khoá từ tài liệu của bạn')),
+      h('div', { class: 'card-actions' }, link('#/teach', 'btn btn-ghost', '🎓 Gia sư của tôi')),
       h('div', { class: 'chips-label muted' }, 'Gợi ý:'),
       chips
     ]));
