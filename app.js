@@ -22,8 +22,10 @@
   var curCourseName = '';      // tên khoá đang mở, dùng cho document.title
   var cInfo = { db: false, ai: false, userId: null, canWrite: null, known: false };
   var focusNext = false;       // true sau khi đổi route: trang kế tiếp chuyển focus vào tiêu đề
-  // Bản web (có HCA_ROUTES) chỉ cần đăng nhập; bản claude.ai cần quyền Người đóng góp.
-  var RO_NOTE = !window.HCA_ROUTES ? 'Bạn đang xem ở chế độ chỉ đọc — đăng nhập hoặc nhờ chủ app cấp quyền Người đóng góp để tạo khoá.'
+  // Bản web (có config.js → window.HCA_CONFIG) chỉ cần đăng nhập; bản claude.ai cần quyền Người đóng góp.
+  // Lưu ý: không dùng window.HCA_ROUTES để nhận biết bản web — teach.js tự đăng ký HCA_ROUTES.teach
+  // trên CẢ HAI nền tảng, nên nếu dùng HCA_ROUTES làm cờ nhận biết sẽ tắt nhầm AI trên claude.ai.
+  var RO_NOTE = !window.HCA_CONFIG ? 'Bạn đang xem ở chế độ chỉ đọc — đăng nhập hoặc nhờ chủ app cấp quyền Người đóng góp để tạo khoá.'
     : (window.HCA_CONFIG && window.HCA_CONFIG.ai) ? 'Bạn đang xem ở chế độ khách — đăng nhập để tạo khoá, lưu tiến độ và dùng Claude.'
     : 'Bạn đang xem ở chế độ khách — đăng nhập để lưu tiến độ học trên mọi thiết bị.';
   // Chỉ đọc: đã biết thông tin kho và (không có db hoặc không có quyền ghi). Chưa biết (canWrite null) thì vẫn cho thử.
@@ -6741,7 +6743,9 @@
 
   function has(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
   // Bản web chạy không có AI (HCA_CONFIG.ai = false): ẩn lối vào các tính năng chỉ có trên claude.ai.
-  function webNoAI() { return !!window.HCA_ROUTES && !(window.HCA_CONFIG && window.HCA_CONFIG.ai); }
+  // Bản web không bật AI khi có config.js (window.HCA_CONFIG) nhưng HCA_CONFIG.ai không true.
+  // Không dùng window.HCA_ROUTES ở đây (xem ghi chú ở RO_NOTE phía trên).
+  function webNoAI() { return !!window.HCA_CONFIG && !window.HCA_CONFIG.ai; }
   function extRoute(name) { var r = window.HCA_ROUTES; return r && name && has(r, name) && typeof r[name] === 'function' ? r[name] : null; }
   function dec(s) { try { return decodeURIComponent(s); } catch (e) { return s; } }
 

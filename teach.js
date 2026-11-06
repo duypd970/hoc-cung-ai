@@ -52,7 +52,9 @@
   function fmtDate(iso) {
     try { return new Date(iso).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }); } catch (e) { return ''; }
   }
-  function webNoAI() { return !!window.HCA_ROUTES && !(window.HCA_CONFIG && window.HCA_CONFIG.ai); }
+  // Khớp với app.js: bản web không bật AI khi có config.js (window.HCA_CONFIG) nhưng .ai không true.
+  // Không dùng window.HCA_ROUTES — file này tự đăng ký HCA_ROUTES.teach trên cả web lẫn claude.ai.
+  function webNoAI() { return !!window.HCA_CONFIG && !window.HCA_CONFIG.ai; }
   function newId() { return 't' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
   /* ---------- Kết nối lưu trữ (giống store.js) ---------- */
